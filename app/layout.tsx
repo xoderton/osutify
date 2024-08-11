@@ -1,9 +1,9 @@
+import { Player } from "@/components/Player";
+import { Sidebar } from "@/components/Sidebar";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
-import "./globals.css";
-import { Sidebar } from "@/components/Sidebar";
 import { getPacks } from "./actions/getPacks";
-import { Player } from "@/components/Player";
+import "./globals.css";
 
 const font = Figtree({ subsets: ["latin"] });
 

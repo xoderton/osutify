@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { Header } from "@/components/Header";
+import Image from "next/image";
 import LikedContent from "./components/LikedContent";
 
 export const revalidate = 0;
@@ -8,11 +8,11 @@ export default function Liked() {
   return (
     <div
       className="
-        bg-neutral-900 
-        rounded-lg 
-        h-full 
-        w-full 
-        overflow-hidden 
+        bg-neutral-900
+        rounded-lg
+        h-full
+        w-full
+        overflow-hidden
         overflow-y-auto
       "
     >
@@ -20,10 +20,10 @@ export default function Liked() {
         <div className="mt-20">
           <div
             className="
-              flex 
-              flex-col 
-              md:flex-row 
-              items-center 
+              flex
+              flex-col
+              md:flex-row
+              items-center
               gap-x-5
             "
           >
@@ -43,10 +43,10 @@ export default function Liked() {
               <p className="hidden md:block font-semibold text-sm">Playlist</p>
               <h1
                 className="
-                  text-white 
-                  text-4xl 
-                  sm:text-5xl 
-                  lg:text-7xl 
+                  text-white
+                  text-4xl
+                  sm:text-5xl
+                  lg:text-7xl
                   font-bold
                 "
               >

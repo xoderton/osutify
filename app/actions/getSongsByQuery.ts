@@ -1,7 +1,7 @@
 import { Song } from "@/types";
+import axios from "axios";
 import { cookies } from "next/headers";
 import { checkSongCover } from "./utils";
-import axios from "axios";
 
 export async function getSongsByQuery(
   query: string,

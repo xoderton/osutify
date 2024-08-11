@@ -1,16 +1,15 @@
 import { Pack } from "@/types";
+import axios from "axios";
 import { cookies } from "next/headers";
 import { checkSongCover } from "./utils";
-import axios from "axios";
 
 export async function getPacks(): Promise<Pack[]> {
   const cookieStore = cookies();
   if (!cookieStore.get("osu_access_token")) return [];
 
   try {
-    const packType = "artist";
     const data = await axios
-      .get(`https://osu.ppy.sh/api/v2/beatmaps/packs?type=${packType}`, {
+      .get(`https://osu.ppy.sh/api/v2/beatmaps/packs?type=artist`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -29,9 +28,7 @@ export async function getPacks(): Promise<Pack[]> {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: `Bearer ${
-              cookieStore.get("osu_access_token")?.value
-            }`,
+            Authorization: `Bearer ${cookieStore.get("osu_access_token")?.value}`,
           },
         })
         .then((res) => res.data);

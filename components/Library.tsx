@@ -22,7 +22,7 @@ export function Library({ packs }: LibraryProps) {
           <MediaItem
             key={item.id}
             onClick={() => router.push(`/playlist/${item.id}`)}
-            data={item}
+            data={{ media: item, location: false }}
           />
         ))}
       </div>

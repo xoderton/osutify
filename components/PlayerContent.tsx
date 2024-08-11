@@ -1,17 +1,17 @@
 "use client";
 
-import useSound from "use-sound";
-import { Song } from "@/types";
-import { MediaItem } from "./MediaItem";
-import { LikeButton } from "./LikeButton";
-import { BsPauseFill, BsPlayFill } from "react-icons/bs";
-import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
-import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
-import { useEffect, useRef, useState } from "react";
-import { TbRepeat, TbRepeatOff } from "react-icons/tb";
-import { BiShuffle } from "react-icons/bi";
-import { VscLoading } from "react-icons/vsc";
 import usePlayer from "@/app/hooks/usePlayer";
+import { Song } from "@/types";
+import { useEffect, useRef, useState } from "react";
+import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
+import { BiShuffle } from "react-icons/bi";
+import { BsPauseFill, BsPlayFill } from "react-icons/bs";
+import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
+import { TbRepeat, TbRepeatOff } from "react-icons/tb";
+import { VscLoading } from "react-icons/vsc";
+import useSound from "use-sound";
+import { LikeButton } from "./LikeButton";
+import { MediaItem } from "./MediaItem";
 import Slider from "./Slider";
 
 interface PlayerContentProps {
@@ -19,7 +19,7 @@ interface PlayerContentProps {
   songUrl: string;
 }
 
-export function PlayerConent({ song, songUrl }: PlayerContentProps) {
+export function PlayerContent({ song, songUrl }: PlayerContentProps) {
   const player = usePlayer();
   const [currentSeek, setCurrentSeek] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -120,9 +120,9 @@ export function PlayerConent({ song, songUrl }: PlayerContentProps) {
       <div className="flex w-full justify-start mb-12">
         <div className="flex items-center gap-x-4 ">
           {song.title.length > 45 ? (
-            <MediaItem data={song} truncate={true} onClick={openBeatmap} />
+            <MediaItem data={{ media: song, location: true }} truncate={true} onClick={openBeatmap} />
           ) : (
-            <MediaItem data={song} onClick={openBeatmap} />
+            <MediaItem data={{ media: song, location: true }} onClick={openBeatmap} />
           )}
 
           <LikeButton songId={song.id} />
@@ -190,7 +190,10 @@ export function PlayerConent({ song, songUrl }: PlayerContentProps) {
           />
           <Slider
             value={player.volume}
-            onChange={(value) => player.setVolume(value)}
+            onChange={(value) => {
+              console.info(value)
+              player.setVolume(value)
+            }}
           />
         </div>
       </div>

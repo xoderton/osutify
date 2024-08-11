@@ -1,14 +1,15 @@
 "use client";
+
+import usePlayer from "@/app/hooks/usePlayer";
+import { Pack } from "@/types";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 import { BiSearch } from "react-icons/bi";
 import { HiHome } from "react-icons/hi";
-import { Box } from "./Box";
-import { SidebarItem } from "./SidebarItem";
-import { Library } from "./Library";
-import { Pack } from "@/types";
-import usePlayer from "@/app/hooks/usePlayer";
 import { twMerge } from "tailwind-merge";
+import { Box } from "./Box";
+import { Library } from "./Library";
+import { SidebarItem } from "./SidebarItem";
 
 interface SidebarProps {
   children: React.ReactNode;

@@ -1,10 +1,10 @@
 "use client";
-import { LikeButton } from "@/components/LikeButton";
-import { Song } from "@/types";
-import { useEffect, useState } from "react";
-import { MediaItem } from "@/components/MediaItem";
 import useOnPlay from "@/app/hooks/useOnPlay";
+import { LikeButton } from "@/components/LikeButton";
+import { MediaItem } from "@/components/MediaItem";
+import { Song } from "@/types";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 export function LikedContent() {
   const [songs, setSongs] = useState<Song[]>([]);
@@ -40,10 +40,10 @@ export function LikedContent() {
     return (
       <div
         className="
-          flex 
-          flex-col 
-          gap-y-2 
-          w-full px-6 
+          flex
+          flex-col
+          gap-y-2
+          w-full px-6
           text-neutral-400
         "
       >
@@ -60,7 +60,7 @@ export function LikedContent() {
             {index + 1}
           </p>
           <div className="flex-1">
-            <MediaItem onClick={(id: string) => onPlay(id)} data={song} />
+            <MediaItem onClick={(id: string) => onPlay(id)} data={{ media: song, location: false }} />
           </div>
           <LikeButton songId={song.id} />
         </div>
