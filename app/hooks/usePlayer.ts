@@ -6,10 +6,12 @@ interface PlayerStore {
   activeSong?: Song;
   volume?: number;
   loop?: boolean;
+  muted?: boolean;
   setSong: (song: Song) => void;
   setSongs: (ids: Song[]) => void;
   setVolume: (volume: number) => void;
   setLoop: (loop: boolean) => void;
+  setMuted: (mute: boolean) => void;
   reset: () => void;
 }
 
@@ -18,10 +20,12 @@ const usePlayer = create<PlayerStore>((set) => ({
   activeSong: undefined,
   volume: 1,
   loop: false,
+  muted: false,
   setSong: (song: Song) => set({ activeSong: song }),
   setSongs: (songs: Song[]) => set({ songs: songs }),
   setVolume: (volume: number) => set({ volume: volume }),
   setLoop: (loop: boolean) => set({ loop: loop }),
+  setMuted: (mute: boolean) => set({ muted: mute }),
   reset: () => set({ songs: [], activeSong: undefined }),
 }));
 

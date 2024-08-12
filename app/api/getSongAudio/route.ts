@@ -5,10 +5,10 @@ export async function GET(request: Request) {
   const id = searchParams.get("id");
 
   const servers = [
-    "https://osu.direct/d/",
-    "https://catboy.best/d/",
-    //"https://api.chimu.moe/v1/download/", // chimu is down, will uncomment when it's back
-    "https://proxy.nerinyan.moe/d/", // nerinyan my beloved
+    "https://direct.osuokayu.moe/api/v1/download/",
+    // "https://catboy.best/d/",
+    // "https://api.chimu.moe/v1/download/",
+    // "https://proxy.nerinyan.moe/d/"
   ];
 
   let audioStream = null;

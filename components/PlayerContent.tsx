@@ -24,6 +24,7 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
   const [currentSeek, setCurrentSeek] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [oldVolume, setOldVolume] = useState(player.volume);
   const loopRef = useRef(player.loop);
 
   const Icon = isLoading ? VscLoading : isPlaying ? BsPauseFill : BsPlayFill;
@@ -98,7 +99,10 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
   };
 
   const toggleMute = () => {
-    player.volume === 0 ? player.setVolume(1) : player.setVolume(0);
+    player.setMuted(!player.muted);
+    setOldVolume(player.volume);
+
+    player.muted ? player.setVolume(oldVolume || 0.05) : player.setVolume(0);
   };
 
   const changeLoop = () => {
