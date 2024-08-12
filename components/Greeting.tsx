@@ -7,14 +7,9 @@ export function Greeting() {
 
   useEffect(() => {
     const date = new Date();
-    const greetings = [
-      "Good night",
-      "Good morning",
-      "Good afternoon",
-      "Good evening",
-    ];
+    const greetings = [ "night", "morning", "afternoon", "evening" ];
 
-    setGreeting(greetings[Math.floor(date.getHours() / 6)]);
+    setGreeting("Good " + greetings[Math.floor(date.getHours() / 6)]);
   }, []);
 
   return (

@@ -7,24 +7,25 @@ interface SlideProps {
   onChange?: (value: number) => void;
   max?: number;
   step?: number;
+  height?: number;
 }
 
-const Slider: React.FC<SlideProps> = ({ value = 0.08, onChange, max = 0.1, step = 0.001 }) => {
+const Slider: React.FC<SlideProps> = ({ value = 0.08, onChange, max = 0.1, step = 0.001, height = 10 }) => {
   const handleChange = (newValue: number[]) => {
     onChange?.(newValue[0]);
   };
 
   return (
     <RadixSlider.Root
-      className="
+      className={`
         relative
         flex
         items-center
         select-none
         touch-none
         w-full
-        h-10
-      "
+        h-${height}
+      `}
       defaultValue={[1]}
       value={[value]}
       onValueChange={handleChange}

@@ -145,7 +145,7 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
         </div>
       </div>
 
-      <div className="hidden h-full md:flex flex-col w-full max-w-[722px] gap-x-6 ">
+      <div className="hidden h-full md:flex flex-col w-full gap-x-4">
         <div className="md:flex justify-center items-center gap-x-6">
           <BiShuffle className="cursor-not-allowed text-neutral-700" />
           <AiFillStepBackward
@@ -178,6 +178,7 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
             onChange={handleSeek}
             max={Math.floor((duration || 1) / 1000)}
             step={1}
+            height={7}
           />
           <p className="text-neutral-400 text-sm">
             {millisecondsToString(duration || 0)}

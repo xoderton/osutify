@@ -31,8 +31,11 @@ export async function getPacks(): Promise<Pack[]> {
             Authorization: `Bearer ${cookieStore.get("osu_access_token")?.value}`,
           },
         })
-        .then((res) => res.data);
+        .then((res) => res.data)
+        .catch((e) => { throw e }); // do nothing, because most of the time it's just timeout error
 
+      if (!packData)
+        return [];
       if (packData?.beatmapsets?.length !== 0)
         await checkSongCover(packData.beatmapsets[0]);
 

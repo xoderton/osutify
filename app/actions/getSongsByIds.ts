@@ -1,14 +1,13 @@
 import { Song } from "@/types";
 import { checkSongCover } from "./utils";
 import axios from "axios";
+import { cookies } from "next/headers";
 
 export async function getSongsByIds(
-  ids: string[],
-  access_token: string
-  // Since we cant use this function without acessing local storage,
-  // we cant access "next/headers" here, so its one way to pass it as a parameter (or me just dumb dumb)
+  ids: string[]
 ): Promise<Song[]> {
-  if (access_token === "") return [];
+  const cookieStore = cookies();
+  if (!cookieStore.get("osu_access_token")) return [];
 
   const beatmapsets = await Promise.all(
     ids.map(async (id) => {
@@ -17,7 +16,7 @@ export async function getSongsByIds(
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: `Bearer ${access_token}`,
+            Authorization: `Bearer ${cookieStore.get("osu_access_token")?.value}`,
           },
         })
         .then((res) => res.data);

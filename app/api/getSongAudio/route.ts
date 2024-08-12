@@ -6,9 +6,8 @@ export async function GET(request: Request) {
 
   const servers = [
     "https://direct.osuokayu.moe/api/v1/download/",
-    // "https://catboy.best/d/",
-    // "https://api.chimu.moe/v1/download/",
-    // "https://proxy.nerinyan.moe/d/"
+    "https://catboy.best/d/",
+    "https://proxy.nerinyan.moe/d/"
   ];
 
   let audioStream = null;

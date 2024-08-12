@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   }
 
   // Call getSongsByIds function with dataToken and ids
-  const result = await getSongsByIds(ids, access_token);
+  const result = await getSongsByIds(ids);
 
   // Handle the result
   if (result) {

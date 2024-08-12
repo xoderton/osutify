@@ -25,20 +25,18 @@ export function LikeButton({ songId }: LikeButtonProps) {
 
   const handleLike = async () => {
     const likedSongs = localStorage.getItem("liked_songs");
-    if (!likedSongs) localStorage.setItem("liked_songs", JSON.stringify([]));
+    if (!likedSongs)
+      localStorage.setItem("liked_songs", JSON.stringify([]));
+
     const parsedLikedSongs = JSON.parse(likedSongs || "[]");
 
     if (isLiked) {
-      const filteredLikedSongs = parsedLikedSongs.filter(
-        (likedSong: string) => likedSong !== songId
-      );
+      const filteredLikedSongs = parsedLikedSongs.filter((likedSong: string) => likedSong !== songId);
       localStorage.setItem("liked_songs", JSON.stringify(filteredLikedSongs));
+
       setIsLiked(false);
     } else {
-      localStorage.setItem(
-        "liked_songs",
-        JSON.stringify([...parsedLikedSongs, songId])
-      );
+      localStorage.setItem("liked_songs", JSON.stringify([...parsedLikedSongs, songId]));
       setIsLiked(true);
     }
 
@@ -48,8 +46,8 @@ export function LikeButton({ songId }: LikeButtonProps) {
   return (
     <button
       className="
-        cursor-pointer 
-        hover:opacity-75 
+        cursor-pointer
+        hover:opacity-75
         transition
       "
       onClick={handleLike}
