@@ -1,17 +1,13 @@
-# 🎵 Osutify
+# 🎵 osu!tify
 
 ![Preview](preview.png)
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/richardscull/osutify.svg?style=social&label=Star)](https://github.com/richardscull/osutify)
-
-## 🌻 Live Demo
-
-A live demo of the application is available at [osutify.vercel.app](https://osutify.vercel.app/).
+>[!WARNING]
+>xoderton's fork is not affiliated and mostly likely won't be up-to-date with [original repository](https://github.com/richardscull/osutify/), bringing only unique features to [xoderton](https://github.com/xoderton/), use it at your risk! ^w^
 
 ## Description
 
-Osutify is a project that aims to create a music player specifically designed for the game osu!. The application uses the osu! API to fetch the latest songs and allows users to play them directly from the application. The application also includes a liked playlist where users can add their favorite songs.
+osu!tify is a project that aims to create a music player specifically designed for the game osu!. The application uses the osu! API to fetch the latest songs and allows users to play them directly from the application. The application also includes a liked playlist where users can add their favorite songs.
 
 ## Features
 
@@ -21,9 +17,19 @@ Osutify is a project that aims to create a music player specifically designed fo
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/richardscull/osutify`
+### Web App
+
+1. Clone the repository: `git clone https://github.com/xoderton/osutify/`
 2. Install the required dependencies: `npm install`
 3. Start the application: `npm start`
+
+### Standalone App
+
+1. Clone the repository: `git clone https://github.com/xoderton/osutify/`
+2. Install the required dependencies: `npm install`
+3. Start the application: `npm run tauri dev`
+
+- [feature/tauri](https://github.com/xoderton/osutify/tree/feature/tauri/) also requires to install [Rust] on your computer in order to run it.
 
 ## License
 
