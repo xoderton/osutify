@@ -3,7 +3,7 @@
 ![Preview](preview.png)
 
 >[!WARNING]
->xoderton's fork is not affiliated and mostly likely won't be up-to-date with [original repository](https://github.com/richardscull/osutify/), bringing only unique features to [xoderton](https://github.com/xoderton/), use it at your risk! ^w^
+>xoderton's fork is not affiliated with [@richardscull](https://github.com/richardscull/) and mostly likely won't be up-to-date with [original repository](https://github.com/richardscull/osutify/), bringing only unique features to [xoderton](https://github.com/xoderton/), use it at your risk! ^w^
 
 ## Description
 
