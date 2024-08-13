@@ -1,15 +1,18 @@
 import { Player } from "@/src/components/Player";
 import { Sidebar } from "@/src/components/Sidebar";
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
+import { Roboto_Flex } from "next/font/google";
 import { getPacks } from "./actions/getPacks";
 import "./globals.css";
 
-const font = Figtree({ subsets: ["latin"] });
+const font = Roboto_Flex({ subsets: ["latin"], weight: "300" });
 
 export const metadata: Metadata = {
-  title: "Osutify - Listen to osu! songs",
-  description: "Spotify clone with osu! beatmaps",
+  title: "osu!tify",
+  description: "Spotify but with osu! songs",
+  authors: [ { name: "shockpast", url: "https://github.com/shockpast" }, { name: "richardscull", url: "https://github.com/richardscull" } ],
+  category: "osu",
+  keywords: ["osu", "spotify", "player", "audio", "nextjs", "osu-player-music", "osu-player", "web-player", "osu-api"]
 };
 
 export default async function RootLayout({

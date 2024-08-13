@@ -18,7 +18,7 @@ interface PlayerStore {
 const usePlayer = create<PlayerStore>((set) => ({
   songs: [],
   activeSong: undefined,
-  volume: 0.005,
+  volume: 0.1 / 25,
   loop: false,
   muted: false,
   setSong: (song: Song) => set({ activeSong: song }),

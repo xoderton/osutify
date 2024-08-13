@@ -1,11 +1,12 @@
 import { Pack } from "@/types";
 import axios from "axios";
-import { cookies } from "next/headers";
 import { checkSongCover } from "./utils";
+import { cookies } from "next/headers";
 
 export async function getPacks(): Promise<Pack[]> {
-  const cookieStore = cookies();
-  if (!cookieStore.get("osu_access_token")) return [];
+  const accessToken = cookies().get("access_token")
+  if (!accessToken)
+    return [];
 
   try {
     const data = await axios
@@ -13,14 +14,13 @@ export async function getPacks(): Promise<Pack[]> {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${cookieStore.get("osu_access_token")?.value}`,
+          Authorization: `Bearer ${accessToken.value}`,
         },
       })
       .then((res) => res.data);
 
-    if (!data) {
+    if (!data)
       return [];
-    }
 
     const packsPromises = data.beatmap_packs.map(async (pack: any) => {
       const packData = await axios
@@ -28,11 +28,11 @@ export async function getPacks(): Promise<Pack[]> {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: `Bearer ${cookieStore.get("osu_access_token")?.value}`,
+            Authorization: `Bearer ${accessToken.value}`,
           },
         })
         .then((res) => res.data)
-        .catch((e) => { throw e }); // do nothing, because most of the time it's just timeout error
+        .catch((e) => { throw e }); // do nothing, because most of the time it"s just timeout error
 
       if (!packData)
         return [];

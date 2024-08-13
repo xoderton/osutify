@@ -6,8 +6,9 @@ import { cookies } from "next/headers";
 export async function getSongsByIds(
   ids: string[]
 ): Promise<Song[]> {
-  const cookieStore = cookies();
-  if (!cookieStore.get("osu_access_token")) return [];
+  const accessToken = cookies().get("access_token")
+  if (!accessToken)
+    return [];
 
   const beatmapsets = await Promise.all(
     ids.map(async (id) => {
@@ -16,7 +17,7 @@ export async function getSongsByIds(
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: `Bearer ${cookieStore.get("osu_access_token")?.value}`,
+            Authorization: `Bearer ${accessToken.value}`,
           },
         })
         .then((res) => res.data);
@@ -24,9 +25,8 @@ export async function getSongsByIds(
     })
   );
 
-  if (!beatmapsets) {
+  if (!beatmapsets)
     return [];
-  }
 
   await Promise.all(
     beatmapsets.map(async (song: any) => {

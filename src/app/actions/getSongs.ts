@@ -1,11 +1,12 @@
 import { Song } from "@/types";
 import axios from "axios";
-import { cookies } from "next/headers";
 import { checkSongCover } from "./utils";
+import { cookies } from "next/headers";
 
 export async function getSongs(): Promise<Song[]> {
-  const cookieStore = cookies();
-  if (!cookieStore.get("osu_access_token")) return [];
+  const accessToken = cookies().get("access_token")
+  if (!accessToken)
+    return [];
 
   try {
     const { beatmapsets } = await axios
@@ -13,14 +14,13 @@ export async function getSongs(): Promise<Song[]> {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${cookieStore.get("osu_access_token")?.value}`,
+          Authorization: `Bearer ${accessToken.value}`,
         },
       })
       .then((res) => res.data);
 
-    if (!beatmapsets) {
+    if (!beatmapsets)
       return [];
-    }
 
     await Promise.all(
       beatmapsets.map(async (song: any) => {
