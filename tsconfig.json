@@ -19,7 +19,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "use-sound": ["./generated-types/"]
+      "use-sound": ["./src/generated-types"]
     }
   },
   "include": [
@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/api/getSongsByIds"
+    "src/app/api/getSongsByIds"
   ],
   "exclude": [
     "node_modules",
