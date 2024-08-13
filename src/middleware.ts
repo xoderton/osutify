@@ -1,9 +1,8 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function middleware(request: NextRequest) {
-  if (request.method !== "GET" || request.nextUrl.pathname.includes("/api"))
-    return NextResponse.next(); // Don't run this middleware on POST requests or API routes
+export const config = { matcher: [ '/((?!api|_next/static|_next/image|favicon.ico).*)', ], }
 
+export async function middleware() {
   const response = NextResponse.next();
 
   if (!response.cookies.get("access_token")) {
@@ -20,16 +19,14 @@ export async function middleware(request: NextRequest) {
       method: "POST",
     });
 
-    if (data.ok) {
-      const json = await data.json();
+    if (!data.ok) throw new Error("Can't get user token from osu.ppy.sh");
 
-      response.headers.set("Refresh", "0")
-      response.cookies.set("access_token", json.access_token, {
-        expires: new Date(Date.now() + json.expires_in * 1000),
-        httpOnly: true,
-        secure: true
-      })
-    }
+    const json = await data.json();
+    response.cookies.set("access_token", json.access_token, {
+      expires: new Date(Date.now() + json.expires_in * 1000),
+      httpOnly: true,
+      secure: true
+    })
   }
 
   return response
