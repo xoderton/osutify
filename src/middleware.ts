@@ -19,14 +19,15 @@ export async function middleware() {
       method: "POST",
     });
 
-    if (!data.ok) throw new Error("Can't get user token from osu.ppy.sh");
+    if (!data.ok)
+      throw new Error("Can't get user token from osu.ppy.sh");
 
     const json = await data.json();
     response.cookies.set("access_token", json.access_token, {
       expires: new Date(Date.now() + json.expires_in * 1000),
       httpOnly: true,
       secure: true
-    })
+    });
   }
 
   return response

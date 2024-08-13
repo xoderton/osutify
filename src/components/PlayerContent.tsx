@@ -7,14 +7,13 @@ import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import { BiShuffle } from "react-icons/bi";
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
+import { LuHardDriveDownload } from "react-icons/lu";
 import { TbRepeat, TbRepeatOff } from "react-icons/tb";
 import { VscLoading } from "react-icons/vsc";
 import useSound from "use-sound";
 import { LikeButton } from "./LikeButton";
 import { MediaItem } from "./MediaItem";
 import Slider from "./Slider";
-import { LuHardDriveDownload } from "react-icons/lu";
-import { isRegistered, onOpenUrl } from "@tauri-apps/plugin-deep-link";
 
 interface PlayerContentProps {
   song: Song;
@@ -132,7 +131,9 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
           )}
 
           <LikeButton songId={song.id} />
-          <a download href={`https://catboy.best/d/${song.id}n`}><LuHardDriveDownload size={24}></LuHardDriveDownload></a>
+          <a download href={`https://catboy.best/d/${song.id}n`}>
+            <LuHardDriveDownload size={24} className="hover:opacity-75 transition"></LuHardDriveDownload>
+          </a>
         </div>
       </div>
 
