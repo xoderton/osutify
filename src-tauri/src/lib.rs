@@ -26,6 +26,7 @@ fn create_ipc() -> DiscordIpcClient {
   let mut client = DiscordIpcClient::new("1272997790623989760").unwrap();
   client.connect().unwrap();
   client.set_activity(activity::Activity::new()
+    .activity_type(activity::ActivityType::Listening)
     .assets(Assets::new()
       .large_image("icon-alt"))
     .details("Chilling...")).unwrap();
@@ -62,6 +63,7 @@ pub fn run() {
 
             client.lock().unwrap()
               .set_activity(activity::Activity::new()
+                .activity_type(activity::ActivityType::Listening)
                 .assets(activity::Assets::new()
                   .large_image(image))
                 .timestamps(activity::Timestamps::new()
