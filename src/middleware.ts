@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const config = { matcher: [ "/((?!api|_next/static|_next/image|favicon.ico).*)", ], }
 
-export async function middleware() {
+export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
-  if (!response.cookies.get("access_token")) {
+  if (!request.cookies.get("access_token")) {
     const data = await fetch("https://osu.ppy.sh/oauth/token", {
       body: JSON.stringify({
         "client_id": process.env.OSU_CLIENT_ID,
