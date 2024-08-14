@@ -17,7 +17,10 @@
         "height": 720,
         "resizable": true,
         "fullscreen": false,
-        "url": "http://localhost:3000"
+        "url": "http://localhost:3000",
+        "center": true,
+        "hiddenTitle": true,
+        "theme": "Dark"
       }
     ],
     "security": {
@@ -26,7 +29,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": "msi",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",

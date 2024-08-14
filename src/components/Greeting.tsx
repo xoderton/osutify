@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from "react";
 
+const greetings = ["Good night!", "Good morning!", "Good afternoon!", "Good evening!"];
+
 export function Greeting() {
   const [greeting, setGreeting] = useState<string>("");
 
   useEffect(() => {
-    const date = new Date();
-    const greetings = [ "night", "morning", "afternoon", "evening" ];
-
-    setGreeting("Good " + greetings[Math.floor(date.getHours() / 6)]);
+    setGreeting(greetings[Math.floor(new Date().getHours() / 6)]);
   }, []);
 
   return (

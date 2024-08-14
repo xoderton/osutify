@@ -28,13 +28,12 @@ fn create_ipc() -> DiscordIpcClient {
   client.set_activity(activity::Activity::new()
     .activity_type(activity::ActivityType::Listening)
     .assets(Assets::new()
-      .large_image("icon-alt"))
+      .large_image("icon-alt-2"))
     .details("Chilling...")).unwrap();
 
   return client;
 }
 
-#[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   let client = Arc::new(Mutex::new(create_ipc()));
 
