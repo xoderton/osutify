@@ -5,7 +5,9 @@ export async function GET(request: Request) {
   const id = searchParams.get("id");
 
   const servers = [
-    "https://catboy.best/d/",
+    "https://central.catboy.best/d/{}n",
+    "https://direct.osuokayu.moe/api/v1/download/{}n",
+    "https://api.nerinyan.moe/d/{}?noVideo=true&noBg=true&NoHitsound=true&NoStoryboard=true"
   ];
 
   let audioStream = null;
@@ -82,7 +84,7 @@ async function getBlobFromUrl(url: string) {
 }
 
 async function blobRace(blob: any, servers: string[], id: string) {
-  let promises = servers.map((server) => getBlobFromUrl(server + id + "n"));
+  let promises = servers.map((server) => getBlobFromUrl(server.replace("{}", id)));
   const data = await Promise.race(promises);
 
   if (data.blob) {
