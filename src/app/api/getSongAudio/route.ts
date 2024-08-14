@@ -5,9 +5,9 @@ export async function GET(request: Request) {
   const id = searchParams.get("id") || "0";
 
   const servers = [
-    "https://central.catboy.best/d/{}n",
-    "https://direct.osuokayu.moe/api/v1/download/{}",
-    "https://api.nerinyan.moe/d/{}?noVideo=true&noBg=true&NoHitsound=true&NoStoryboard=true",
+    // "https://central.catboy.best/d/{}n",
+    "https://direct.osuokayu.moe/api/v1/d/{}",
+    // "https://api.nerinyan.moe/d/{}?noVideo=true&noBg=true&NoHitsound=true&NoStoryboard=true",
   ];
 
   let audioStream = null;
