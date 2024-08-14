@@ -2,50 +2,19 @@ import * as zip from "@zip.js/zip.js";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
+  const id = searchParams.get("id") || "0";
 
   const servers = [
     "https://central.catboy.best/d/{}n",
-    "https://direct.osuokayu.moe/api/v1/download/{}n",
-    "https://api.nerinyan.moe/d/{}?noVideo=true&noBg=true&NoHitsound=true&NoStoryboard=true"
+    "https://direct.osuokayu.moe/api/v1/download/{}",
+    "https://api.nerinyan.moe/d/{}?noVideo=true&noBg=true&NoHitsound=true&NoStoryboard=true",
   ];
 
   let audioStream = null;
-  let blob: Blob | null = null;
+  const blob = await blobRace(servers, id, servers.length);
 
-  // Selfish individualism at its finest. We're going 💪
-  blob = await blobRace(blob, servers, id!);
-
-  if (!blob) {
-    return new Response("Not Found", { status: 404 });
-  }
-
-  try {
-    const reader = new zip.ZipReader(new zip.BlobReader(blob));
-    const files = (await reader.getEntries()) || []
-
-    for (const file of files) {
-      if (!file.filename.endsWith(".osu")) continue;
-
-      const text = await file.getData!(new zip.TextWriter("utf-8"));
-      for (const line of text.split("\n")) {
-        if (!line.startsWith("AudioFilename:")) continue;
-
-        const audioFilename = line.split(":")[1].trim();
-        const audioFile = files.find((f) => f.filename === audioFilename);
-
-        if (!audioFile) {
-          console.error("Audio file not found in beatmap");
-          break;
-        }
-
-        audioStream = await audioFile.getData!(new zip.BlobWriter(`audio/${audioFilename.split(".").pop()}`));
-        break;
-      }
-    }
-  } catch (e) {
-    console.error("Failed to extract audio from beatmap");
-    console.error(e);
+  if (blob) {
+    audioStream = await unzipBlob(blob);
   }
 
   let isShortVer = false;
@@ -64,35 +33,57 @@ export async function GET(request: Request) {
   });
 }
 
-async function getBlobFromUrl(url: string) {
-  return await fetch(url, {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-      "Cache-Control": `public, max-age=60`,
-    },
-  })
+async function getBlobFromUrl(url: string, id: string) {
+  return await fetch(url.valueOf().replace("{}", id))
     .then((res) => {
       if (!res.ok) return { url: url, blob: null };
-
       return { url: url, blob: res.blob() };
     })
-    .catch((err) => {
-      console.error(err); // Got "socketError: other side closed" some times, need to investigate
+    .catch((_) => {
       return { url: url, blob: null };
     });
 }
 
-async function blobRace(blob: any, servers: string[], id: string) {
-  let promises = servers.map((server) => getBlobFromUrl(server.replace("{}", id)));
+async function blobRace(servers: string[], id: string, retriesLeft: number) {
+  let promises = servers.map((server) => getBlobFromUrl(server, id));
   const data = await Promise.race(promises);
 
   if (data.blob) {
     return await data.blob;
   } else {
-    const url = data.url.split("/").slice(0, -1).join("/");
-    servers = servers.filter((s) => s !== url + "/");
-    if (servers.length === 0) return blob;
-    return await blobRace(blob, servers, id);
+    servers = servers.filter((s) => s.includes(data.url) === false);
+    if (!servers.length || !retriesLeft) return null;
+    return await blobRace(servers, id, retriesLeft - 1);
+  }
+}
+
+async function unzipBlob(blob: Blob) {
+  try {
+    const reader = new zip.ZipReader(new zip.BlobReader(blob));
+    const files = (await reader.getEntries()) || [];
+
+    for (const file of files) {
+      if (!file.filename.endsWith(".osu")) continue;
+
+      const text = await file.getData!(new zip.TextWriter("utf-8"));
+      for (const line of text.split("\n")) {
+        if (!line.startsWith("AudioFilename:")) continue;
+
+        const audioFilename = line.split(":")[1].trim();
+        const audioFile = files.find((f) => f.filename === audioFilename);
+
+        if (!audioFile) {
+          console.error("Audio file not found in beatmap");
+          break;
+        }
+
+        return await audioFile.getData!(
+          new zip.BlobWriter(`audio/${audioFilename.split(".").pop()}`)
+        );
+      }
+    }
+  } catch (e) {
+    console.error("Failed to extract audio from beatmap");
+    console.error(e);
   }
 }
