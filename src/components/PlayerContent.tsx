@@ -229,7 +229,6 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
           <Slider
             value={player.volume}
             onChange={(value) => {
-              console.info(value)
               player.setVolume(value)
             }}
           />

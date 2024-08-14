@@ -17,7 +17,7 @@
         "height": 720,
         "resizable": true,
         "fullscreen": false,
-        "url": "http://localhost:3000",
+        "url": "https://osutify-gilt.vercel.app/",
         "center": true,
         "hiddenTitle": true,
         "theme": "Dark"
