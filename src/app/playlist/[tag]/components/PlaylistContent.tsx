@@ -5,6 +5,7 @@ import { Song } from "@/types";
 import { MediaItem } from "@/src/components/MediaItem";
 import useOnPlay from "@/src/app/hooks/useOnPlay";
 import usePlayer from "@/src/app/hooks/usePlayer";
+import { LuHardDriveDownload } from "react-icons/lu";
 
 export function PlaylistContent({ songs }: { songs: Song[] }) {
   const onPlay = useOnPlay(songs);
@@ -37,6 +38,9 @@ export function PlaylistContent({ songs }: { songs: Song[] }) {
             <MediaItem onClick={(id: string) => onPlay(id)} data={{ media: song, location: false }} />
           </div>
           <LikeButton songId={song.id} />
+          <a download href={`https://direct.osuokayu.moe/api/v1/download/${song.id}`}>
+            <LuHardDriveDownload size={24} className="hover:opacity-75 transition"></LuHardDriveDownload>
+          </a>
         </div>
       ))}
     </div>
