@@ -19,17 +19,17 @@ osu!tify is a project that aims to create a music player specifically designed f
 
 ### Web App
 
-1. Clone the repository: `git clone https://github.com/xoderton/osutify/`
-2. Install the required dependencies: `npm install`
+1. Clone the repository: `git clone --branch feature/tauri https://github.com/xoderton/osutify/`
+2. Install the required dependencies: `npm install --force`
 3. Start the application: `npm start`
 
 ### Standalone App
 
-1. Clone the repository: `git clone https://github.com/xoderton/osutify/`
-2. Install the required dependencies: `npm install`
+1. Clone the repository: `git clone --branch feature/tauri https://github.com/xoderton/osutify/`
+2. Install the required dependencies: `npm install --force` *(not required, if you already installed Web App)*
 3. Start the application: `npm run tauri dev`
 
-- [feature/tauri](https://github.com/xoderton/osutify/tree/feature/tauri/) also requires to install [Rust] on your computer in order to run it.
+- [feature/tauri](https://github.com/xoderton/osutify/tree/feature/tauri/) also requires to install [Rust](https://www.rust-lang.org/) on your computer in order to run it.
 
 ## License
 
