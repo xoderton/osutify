@@ -5,6 +5,7 @@ import usePlayer from "@/src/app/hooks/usePlayer";
 import { LikeButton } from "@/src/components/LikeButton";
 import { MediaItem } from "@/src/components/MediaItem";
 import { Song } from "@/types";
+import { LuHardDriveDownload } from "react-icons/lu";
 
 interface SearchContentProps {
   songs: Song[];
@@ -42,6 +43,9 @@ function SearchContent({ songs }: SearchContentProps) {
             <MediaItem onClick={(id: string) => onPlay(id)} data={{ media: song, location: false }} />
           </div>
           <LikeButton songId={song.id} />
+          <a download href={`https://direct.osuokayu.moe/api/v1/download/${song.id}`}>
+            <LuHardDriveDownload size={24} className="hover:opacity-75 transition"></LuHardDriveDownload>
+          </a>
         </div>
       ))}
     </div>

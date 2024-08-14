@@ -160,7 +160,7 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
           )}
 
           <LikeButton songId={song.id} />
-          <a download href={`https://catboy.best/d/${song.id}n`}>
+          <a download href={`https://direct.osuokayu.moe/api/v1/download/${song.id}`}>
             <LuHardDriveDownload size={24} className="hover:opacity-75 transition"></LuHardDriveDownload>
           </a>
         </div>
