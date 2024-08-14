@@ -112,7 +112,7 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
           title: song.title,
           image: song.thumbnail,
           beatmap: `https://osu.ppy.sh/beatmapsets/${song.id}`,
-          duration: Math.round(duration || 1), // there will always 1, no matter what
+          duration: Math.round(duration || 1),
           seek: Math.round(sound?.seek())
         }
       })
