@@ -1,3 +1,6 @@
+>[!WARNING]
+>`main` branch is not updated and might contain alot of issues, you should use [feature/tauri] branch instead, rust itself is not required to run osu!tify self-hosted, you still can open it in browser, and browse.
+
 # 🎵 Osutify
 
 ![Preview](preview.png)
