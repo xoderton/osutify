@@ -14,6 +14,7 @@ import useSound from "use-sound";
 import { LikeButton } from "./LikeButton";
 import { MediaItem } from "./MediaItem";
 import Slider from "./Slider";
+import { emit } from "@tauri-apps/api/event";
 
 interface PlayerContentProps {
   song: Song;
@@ -71,10 +72,25 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
       sound?.volume(player.volume);
     },
     onend: () => {
+      emit("tauri", {
+        id: "rich_presence",
+        rpc: { action: "end" }
+      })
+
       setIsPlaying(false);
       if (loopRef.current === false) onPlayNext();
     },
     onpause: () => {
+      emit("tauri", {
+        id: "rich_presence",
+        rpc: {
+          action: "pause",
+          artist: song.author,
+          title: song.title,
+          image: song.thumbnail,
+        }
+      })
+
       setIsPlaying(false);
     },
     format: ["mp3"],
@@ -87,6 +103,19 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
     const seekInterval = setInterval(() => {
       if (!sound) return;
       setCurrentSeek(Math.round(sound?.seek()));
+
+      emit("tauri", {
+        id: "rich_presence",
+        rpc: {
+          action: "play",
+          artist: song.author,
+          title: song.title,
+          image: song.thumbnail,
+          beatmap: `https://osu.ppy.sh/beatmapsets/${song.id}`,
+          duration: Math.round(duration || 1), // there will always 1, no matter what
+          seek: Math.round(sound?.seek())
+        }
+      })
     }, 1000);
 
     return () => {

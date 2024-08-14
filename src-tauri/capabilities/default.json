@@ -6,6 +6,8 @@
     "main"
   ],
   "permissions": [
-    "core:app:default"
+    "core:app:default",
+    "core:event:allow-emit",
+    "core:event:default"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "productName": "osutify",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "identifier": "me.shockpast",
   "build": {
     "frontendDist": "../src/",
@@ -9,6 +9,7 @@
     "beforeBuildCommand": "npm run build"
   },
   "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "title": "osutify",
