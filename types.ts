@@ -1,6 +1,7 @@
 export interface Song {
   id: string;
   author: string;
+  creator: string; // of the beatmap
   title: string;
   song_url: string;
   thumbnail: string;

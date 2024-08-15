@@ -5,7 +5,7 @@ import { Pack, Song } from "@/types";
 import Image from "next/image";
 
 interface MediaItemProps {
-  data: { media: Pack | Song, location: boolean };
+  data: { media: Pack & Song, location: boolean };
   truncate?: boolean;
   onClick?: (id: string) => void;
 }
@@ -39,13 +39,13 @@ export function MediaItem({ data, truncate, onClick }: MediaItemProps) {
           title={data.media.title}
           className={`font-semibold ${!data.location && onPlayer.activeSong?.id == data.media.id ? "text-[#1ed760]" : "text-neutral-100"} truncate w-full`}
         >
-          {truncate ? data.media.title.slice(0, 45) + "..." : data.media.title}
+          {truncate ? data.media.title.slice(0, 36) + "..." : data.media.title}
         </p>
         <p
-          title={data.media.author}
+          title={`${data.media.author}` + ("creator" in data.media ? ` - ${data.media.creator}` : "")}
           className="text-neutral-400 text-sm truncate w-full"
         >
-          {data.media.author}
+          {`${data.media.author}` + ("creator" in data.media ? ` - ${data.media.creator}` : "")}
         </p>
       </div>
     </div>

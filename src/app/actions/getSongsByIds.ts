@@ -36,6 +36,7 @@ export async function getSongsByIds(
 
   const songs = beatmapsets.map((song: any) => ({
     id: song.id,
+    creator: song.creator,
     author: song.artist,
     title: song.title,
     song_url: song.preview_url,

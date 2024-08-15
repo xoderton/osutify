@@ -36,6 +36,7 @@ export async function getPack(tag: string): Promise<GetPackResponse> {
 
     const songs = beatmapsets.map((song: any) => ({
       id: song.id,
+      creator: song.creator,
       author: song.artist,
       title: song.title,
       song_url: song.preview_url,
