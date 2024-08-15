@@ -5,7 +5,7 @@ import { Pack, Song } from "@/types";
 import Image from "next/image";
 
 interface MediaItemProps {
-  data: { media: Pack & Song, location: boolean };
+  data: { media: Pack | Song, location: boolean };
   truncate?: boolean;
   onClick?: (id: string) => void;
 }
