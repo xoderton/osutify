@@ -66,7 +66,7 @@ pub fn run() {
                         let start = chrono::offset::Utc::now().timestamp_millis() - (seek * 1000);
                         let end = start + duration;
 
-                        client
+                        _ = client
                             .lock()
                             .unwrap()
                             .set_activity(
@@ -77,8 +77,7 @@ pub fn run() {
                                     .buttons(buttons)
                                     .state(artist)
                                     .details(title),
-                            )
-                            .expect("Activity couldn't be updated");
+                            );
                     }
                 }
             });
