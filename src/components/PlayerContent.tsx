@@ -89,7 +89,7 @@ export function PlayerContent({ song, songUrl }: PlayerContentProps) {
       if (!sound) return;
       setCurrentSeek(Math.round(sound?.seek()));
 
-      if ("__TAURI_INTERNALS__" in window && isPlaying)
+      if ("__TAURI_INTERNALS__" in window)
         emit("tauri", {
           id: "rich_presence",
           rpc: {
