@@ -1,0 +1,20 @@
+{
+  labelsSynonyms: {
+    bug: ["error", "need fix", "not working", "crashing"],
+    enhancement: ["upgrade"],
+    question: ["help", "how can i"]
+  },
+  labelsNotAllowed: [
+    "documentation",
+    "duplicate",
+    "good first issue",
+    "help wanted",
+    "invalid",
+    "med priority",
+    "high priority",
+    "low priority",
+    "needs review"
+  ],
+  defaultLabels: ["needs triage"],
+  ignoreComments: true
+}
